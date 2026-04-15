@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 from file_logger import FileLogger
-from netbox_onboarding.config import load_config, create_session
+from netbox_onboarding.config import load_minimal_config, create_session
 from netbox_onboarding.client import NetboxClient
 from netbox_onboarding.activate import activate_from_manifest
 
@@ -25,7 +25,7 @@ def main() -> None:
         sys.exit(1)
 
     # -- Setup -------------------------------------------------------------
-    config = load_config()
+    config = load_minimal_config()
     session = create_session()
     logger = FileLogger(
         logs_dir=Path("logs"),

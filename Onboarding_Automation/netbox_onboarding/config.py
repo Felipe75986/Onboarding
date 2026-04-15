@@ -57,6 +57,26 @@ def load_config() -> OnboardingConfig:
     )
 
 
+def load_minimal_config() -> OnboardingConfig:
+    """Load config requiring only the NetBox token.
+
+    Used by scripts that don't need a spreadsheet or reserva status
+    (e.g. run_activate.py, run_connections.py).
+    """
+    token = os.getenv("RD_OPTION_NETBOXTOKEN")
+    if not token:
+        raise ValueError("Missing required environment variable: RD_OPTION_NETBOXTOKEN")
+
+    return OnboardingConfig(
+        file_name="",
+        token=token,
+        reserva="",
+        base_url=BASE_URL,
+        url_api=f"{BASE_URL}/api",
+        status="",
+    )
+
+
 # ---------------------------------------------------------------------------
 # HTTP session with automatic retry
 # ---------------------------------------------------------------------------
