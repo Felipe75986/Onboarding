@@ -1,0 +1,9 @@
+Cabinet,,,,,,,,,,
+,,,,,,,,,,
+Blue Cable,,RU ,SW-NAME,,,,,,,
+Black Cable,,RU ,SW-NAME,,,,,,,
+White Cable,,RU ,SW-NAME,,,,,,,
+,,,,,,,,,,
+Server,RU,Port1 Blue,,Port2 Black,,IPMI (White),,IPMI IP,Mask,Gateway
+,,Switch RU,Port,Switch RU,Port,Switch RU,Port,,,
+,,RU ,,RU ,,RU ,,,255.255.255.0,

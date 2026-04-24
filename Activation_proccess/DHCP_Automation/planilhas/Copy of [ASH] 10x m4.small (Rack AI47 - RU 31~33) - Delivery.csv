@@ -1,0 +1,18 @@
+show,,AI47,,,,,,,,,
+,,,,,,,,,,,
+Blue Cable,,RU 43~45,SWACC48-ASH,,,,,,,,
+Black Cable,,RU 39~41,SWACC49-ASH,,,,,,,,
+White Cable,,RU 39~41,SWACC49-ASH,,,,,,,,
+,,,,,,,,,,,
+Server,Server Name,RU,Port1 (Blue),,Port2 (Black),,IPMI (White),,IPMI IP,Mask,Gateway
+,,,Switch RU,Port,Switch RU,Port,Switch RU,Port,,,
+m4.sma-ai47-ru31-node1,,31~33,RU 43~45,11,RU 39~41,11,RU 39~41,95,10.34.84.68,255.255.255.0,10.34.84.1
+m4.sma-ai47-ru31-node2,,,RU 43~45,12,RU 39~41,12,,,10.34.84.69,,
+m4.sma-ai47-ru31-node3,,,RU 43~45,13,RU 39~41,13,,,10.34.84.70,,
+m4.sma-ai47-ru31-node4,,,RU 43~45,14,RU 39~41,14,,,10.34.84.71,,
+m4.sma-ai47-ru31-node5,,,RU 43~45,15,RU 39~41,15,,,10.34.84.72,,
+m4.sma-ai47-ru31-node6,,,RU 43~45,16,RU 39~41,16,,,10.34.84.73,,
+m4.sma-ai47-ru31-node7,,,RU 43~45,17,RU 39~41,17,,,10.34.84.74,,
+m4.sma-ai47-ru31-node8,,,RU 43~45,18,RU 39~41,18,,,10.34.84.75,,
+m4.sma-ai47-ru31-node9,,,RU 43~45,19,RU 39~41,19,,,10.34.84.76,,
+m4.sma-ai47-ru31-node10,,,RU 43~45,20,RU 39~41,20,,,10.34.84.77,,

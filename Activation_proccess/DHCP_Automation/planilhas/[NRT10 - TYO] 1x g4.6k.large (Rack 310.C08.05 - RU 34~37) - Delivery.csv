@@ -1,0 +1,9 @@
+Cabinet,,310.C08.05,,,,,,,,,
+,,,,,,,,,,,
+100G QSFP/MPO,,RU 45,SWACC75-TY4,,,,,,,,
+100G QSFP/MPO,,RU 43,SWACC76-TY4,,,,,,,,
+White Cable,,RU 39~40,SWACC77-TY4,,,,,,,,
+,,,,,,,,,,,
+Server,,RU,Port 1 (100GQSFP+MPO),,Port 2 (100GQSFP+MPO),,IPMI (White),,IPMI IP,Mask,Gateway
+,,,Switch RU,Port,Switch RU,Port,Switch RU,Port,,,
+g4.6k.large-310.C08.05-ru34,,RU 34~37,45,1,43,1,39~40,1,10.34.94.104,255.255.255.0,10.34.94.1

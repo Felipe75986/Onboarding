@@ -1,0 +1,12 @@
+Cabinet,,B12,,,,,,,,,
+,,,,,,,,,,,
+Blue cable,,RU 37~38,SWACC57-DA2,,,,,,,,
+Black cable,,RU 34~35,SWACC58-DA2,,,,,,,,
+White Cable,,RU 34~35,SWACC58-DA2,,,,,,,,
+,,,,,,,,,,,
+Server,,RU,Port1 (Blue),,Port2 (Black),,IPMI (White),,IPMI IP,Mask,Gateway
+,,,Switch RU,Port,Switch RU,Port,Switch RU,Port,,,
+m4-lar-B12-ru06-node1,,06~07,RU 37~38,32,RU 34~35,32,RU 34~35,65,10.213.118.84/24,255.255.255.0,10.213.118.1
+m4-lar-B12-ru06-node2,,,,33,,33,,64,10.213.118.85,,
+m4-lar-B12-ru06-node3,,,,34,,34,,63,10.213.118.86,,
+m4-lar-B12-ru06-node4,,,,35,,35,,62,10.213.118.87,,

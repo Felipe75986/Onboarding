@@ -1,0 +1,12 @@
+Cabinet,,Rack 100.C01.06,,,,,,,,,
+,,,,,,,,,,,
+Blue Cable,,RU 26~27,SWACC10-SJC2,,,,,,,,
+Black Cable,,RU 23~24,SWACC11-SJC2,,,,,,,,
+White Cable,,RU 23~24,SWACC11-SJC2,,,,,,,,
+,,,,,,,,,,,
+Server,,RU,Port1 - 100G QSFP+MPO,,Port2 - 100G QSFP+MPO,,IPMI (White),,IPMI IP,Mask,Gateway
+,,,Switch RU,Port,Switch RU,Port,Switch RU,Port,,,
+m4.lar-c01.06-ru08-node1,,08~09,RU 26~27,17,RU 23~24,17,RU 23~24,77,10.223.239.90,255.255.255.0,10.223.239.1
+m4.lar-c01.06-ru08-node2,,,RU 26~27,18,RU 23~24,18,RU 23~24,78,10.223.239.91,,
+m4.lar-c01.06-ru08-node3,,,RU 26~27,19,RU 23~24,19,RU 23~24,79,10.223.239.92,,
+m4.lar-c01.06-ru08-node4,,,RU 26~27,20,RU 23~24,20,RU 23~24,80,10.223.239.93,,
