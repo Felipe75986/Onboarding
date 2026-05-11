@@ -1,0 +1,113 @@
+- name: dhcp-provisioning
+  description: >
+    Aplica configuração DHCP (host entries) no servidor IPMI via SSH.
+    Modo chassis: lê MACs do CSV de Onboarding.
+    Modo individual: descobre MACs via SSH no switch (NetBox lookup + netmiko).
+    Faz backup automático de dhcpd.conf antes de qualquer mudança.
+  loglevel: INFO
+  executionEnabled: true
+  scheduleEnabled: false
+
+  options:
+    # ── Modo de operação ────────────────────────────────────────────
+    - name: MODE
+      label: Mode
+      description: 'chassis = lê MACs do CSV de Onboarding. individual = descobre MACs via switch.'
+      required: true
+      enforced: true
+      values:
+        - chassis
+        - individual
+      value: individual
+
+    # ── Identificação do rack ────────────────────────────────────────
+    - name: RACK_NAME
+      label: Rack Name
+      description: 'Nome do rack (ex: 01.03, AI47, B12). Usado nos hostnames do dhcpd.conf.'
+      required: true
+
+    - name: RU_POSITION
+      label: RU Position
+      description: 'Posição RU do conjunto (ex: 22~32, 31-33). Usado nos hostnames do dhcpd.conf.'
+      required: true
+
+    # ── Arquivos CSV (upload) ────────────────────────────────────────
+    - name: ONBOARDING_CSV
+      label: Onboarding CSV
+      description: 'CSV exportado da aba Onboarding (obrigatório no modo chassis).'
+      required: false
+      type: file
+
+    - name: DELIVERY_CSV
+      label: Delivery CSV
+      description: 'CSV exportado da aba Delivery (obrigatório no modo individual).'
+      required: false
+      type: file
+
+    # ── NetBox ──────────────────────────────────────────────────────
+    - name: NETBOXTOKEN
+      label: NetBox Token
+      description: 'Token de API do NetBox (Key Storage).'
+      required: true
+      secure: true
+      storagePath: keys/project/activation-pipeline/netbox-token
+      valueExposed: true
+
+    # ── DHCP Server ─────────────────────────────────────────────────
+    - name: DHCP_SERVER_HOST
+      label: DHCP Server Host
+      description: 'IP do servidor DHCP onde o dhcpd.conf será aplicado.'
+      required: true
+
+    - name: DHCP_SERVER_USER
+      label: DHCP Server User
+      description: 'Usuário SSH do servidor DHCP (ex: ubuntu).'
+      required: true
+      value: ubuntu
+
+    - name: DHCP_SERVER_PASSWORD
+      label: DHCP Server Password
+      description: 'Senha SSH do servidor DHCP.'
+      required: true
+      secure: true
+      valueExposed: true
+
+    # ── Switch (somente modo individual) ────────────────────────────
+    - name: SWITCH_USERNAME
+      label: Switch Username
+      description: 'Usuário SSH do switch (somente modo individual).'
+      required: false
+
+    - name: SWITCH_PASSWORD
+      label: Switch Password
+      description: 'Senha SSH do switch (somente modo individual).'
+      required: false
+      secure: true
+      valueExposed: true
+
+    - name: SWITCH_SECRET
+      label: Switch Enable Secret
+      description: 'Enable secret Cisco IOS (somente modo individual + switches IOS).'
+      required: false
+      secure: true
+      valueExposed: true
+
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+      - script: |
+          #!/bin/bash
+          set +e
+          cd /scripts/DHCP_Automation
+          python3 run_dhcp.py
+          EXIT=$?
+          echo ""
+          echo "===== Últimas 80 linhas do FileLogger ====="
+          LOG_FILE="logs/$(date +%Y-%m-%d)_system.log"
+          if [ -f "$LOG_FILE" ]; then
+              tail -80 "$LOG_FILE"
+          else
+              echo "(sem arquivo de log em $LOG_FILE)"
+          fi
+          exit $EXIT

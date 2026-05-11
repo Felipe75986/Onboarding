@@ -1,0 +1,54 @@
+- name: generate-sheet
+  description: 'Phase 1 - Clone master template, prefill with Ops inputs, return Drive URL.'
+  loglevel: INFO
+  executionEnabled: true
+  scheduleEnabled: false
+  options:
+    - name: SITE
+      description: 'Site code (e.g., LAX5)'
+      required: true
+    - name: RACK
+      description: 'Rack identifier (e.g., A-07-15-1-A)'
+      required: true
+    - name: CABINET
+      description: 'Cabinet code (e.g., A-07-15)'
+      required: true
+    - name: PLATFORM
+      description: 'Platform name (e.g., m4.xlarge, c3.large.x86)'
+      required: true
+    - name: TICKET
+      description: 'Onboarding ticket number (e.g., TKT-1234)'
+      required: true
+    - name: PROCUREMENT_TICKET
+      description: 'Procurement ticket (e.g., PROC-9876)'
+      required: true
+    - name: CLUSTER
+      description: 'Cluster name (e.g., cluster-A)'
+      required: true
+    - name: DEVICE_TYPE
+      description: 'NetBox device type (e.g., Dell-R740xd)'
+      required: true
+    - name: SERVER_COUNT
+      description: 'Number of servers / chassis nodes (positive integer)'
+      required: true
+      regex: '^[1-9][0-9]*$'
+    - name: MODE
+      description: 'chassis = devices share a chassis (RU column blank); individual = standalone, one RU per device'
+      required: true
+      enforced: true
+      values:
+        - chassis
+        - individual
+    - name: CHASSIS_NAME
+      description: 'Required when MODE=chassis (ignored otherwise). Used to derive deployment names: {chassis_name}-node1..N'
+    - name: CHASSIS_TYPE
+      description: 'Required when MODE=chassis. NetBox chassis device type.'
+    - name: CHASSIS_RU
+      description: 'Required when MODE=chassis. RU range, e.g., 20~33'
+    - name: POSITIONS
+      description: 'Required when MODE=individual. Comma-separated RUs (e.g., 20,22,24). len() must equal SERVER_COUNT.'
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+      - exec: 'python3 /scripts/Sheet_Generator/run_generate_sheet.py'

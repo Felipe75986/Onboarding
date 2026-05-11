@@ -1,0 +1,29 @@
+- name: onboarding
+  description: 'Phase 2 - Read filled Onboarding CSV, validate shape, create chassis + devices in NetBox sandbox.'
+  loglevel: INFO
+  executionEnabled: true
+  scheduleEnabled: false
+  options:
+    - name: PLANILHA
+      description: 'Onboarding CSV exported from Google Sheets (File -> Download -> Comma Separated Values)'
+      required: true
+      type: file
+    - name: NETBOXTOKEN
+      description: 'NetBox API token (pulled from Key Storage)'
+      required: true
+      secure: true
+      storagePath: keys/project/activation-pipeline/netbox-token
+      valueExposed: true
+    - name: RESERVA
+      description: 'reserved -> devices created in planned state; active -> created already active'
+      required: true
+      enforced: true
+      values:
+        - reserved
+        - active
+      value: reserved
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+      - exec: 'cd /scripts/Onboarding_Automation && python3 run_onboarding.py'
